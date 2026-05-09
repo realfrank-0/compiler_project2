@@ -1,0 +1,38 @@
+digraph ParseTree {
+    node [fontname="Arial", fontsize=12];
+    rankdir=TB;
+
+    n0  [label="S",   shape=circle, style=filled, fillcolor="#FFFFFF"]
+    n1  [label="P",   shape=circle, style=filled, fillcolor="#FFFFFF"]
+    n2  [label="S'",  shape=circle, style=filled, fillcolor="#FFFFFF"]
+    n3  [label="id",  shape=rect,   style=filled, fillcolor="#AED6F1"]
+    n4  [label="R",   shape=circle, style=filled, fillcolor="#FFFFFF"]
+    n5  [label="^",   shape=rect,   style=filled, fillcolor="#AED6F1"]
+    n6  [label="id",  shape=rect,   style=filled, fillcolor="#AED6F1"]
+    n7  [label="R",   shape=circle, style=filled, fillcolor="#FFFFFF"]
+    n8  [label="^",   shape=rect,   style=filled, fillcolor="#AED6F1"]
+    n9  [label="id",  shape=rect,   style=filled, fillcolor="#AED6F1"]
+    n10 [label="R",   shape=circle, style=filled, fillcolor="#FFFFFF"]
+    n11 [label="ε",   shape=rect,   style=filled, fillcolor="#F9E79F"]
+    n12 [label=";",   shape=rect,   style=filled, fillcolor="#AED6F1"]
+    n13 [label="P",   shape=circle, style=filled, fillcolor="#FFFFFF"]
+    n14 [label="S'",  shape=circle, style=filled, fillcolor="#FFFFFF"]
+    n15 [label="id",  shape=rect,   style=filled, fillcolor="#AED6F1"]
+    n16 [label="R",   shape=circle, style=filled, fillcolor="#FFFFFF"]
+    n17 [label="^",   shape=rect,   style=filled, fillcolor="#AED6F1"]
+    n18 [label="id",  shape=rect,   style=filled, fillcolor="#AED6F1"]
+    n19 [label="R",   shape=circle, style=filled, fillcolor="#FFFFFF"]
+    n20 [label="ε",   shape=rect,   style=filled, fillcolor="#F9E79F"]
+    n21 [label="ε",   shape=rect,   style=filled, fillcolor="#F9E79F"]
+
+    n0->n1; n0->n2;
+    n1->n3; n1->n4;
+    n4->n5; n4->n6; n4->n7;
+    n7->n8; n7->n9; n7->n10;
+    n10->n11;
+    n2->n12; n2->n13; n2->n14;
+    n13->n15; n13->n16;
+    n16->n17; n16->n18; n16->n19;
+    n19->n20;
+    n14->n21;
+}

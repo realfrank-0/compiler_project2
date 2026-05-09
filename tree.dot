@@ -1,0 +1,116 @@
+/*
+ * tree.dot  –  Graphviz DOT file for the parse tree of:
+ *
+ *   id ^ id ^ id ; id ^ id
+ *
+ * Grammar:
+ *   S  → P S'
+ *   S' → ; P S' | ε
+ *   P  → id R
+ *   R  → ^ id R  | ε
+ *
+ * Generate image:   dot -Tpng tree.dot -o tree.png
+ *
+ * Node colours:
+ *   Non-terminals  → white circle
+ *   Terminals      → light-blue rectangle  (#AED6F1)
+ *   Epsilon        → yellow rectangle      (#F9E79F)
+ *
+ * Tree structure (matches reference tree in assignment PDF):
+ *
+ *   S
+ *   ├── P
+ *   │   ├── id
+ *   │   └── R
+ *   │       ├── ^
+ *   │       ├── id
+ *   │       └── R
+ *   │           ├── ^
+ *   │           ├── id
+ *   │           └── R  → ε
+ *   └── S'
+ *       ├── ;
+ *       ├── P
+ *       │   ├── id
+ *       │   └── R
+ *       │       ├── ^
+ *       │       ├── id
+ *       │       └── R  → ε
+ *       └── S' → ε
+ */
+
+digraph ParseTree {
+    node [fontname="Arial", fontsize=12];
+    rankdir=TB;
+
+    /* ── Non-terminal nodes (white circles) ──────────────────── */
+    S    [label="S",   shape=circle, style=filled, fillcolor="#FFFFFF"];
+    P1   [label="P",   shape=circle, style=filled, fillcolor="#FFFFFF"];
+    SP1  [label="S'",  shape=circle, style=filled, fillcolor="#FFFFFF"];
+    R1   [label="R",   shape=circle, style=filled, fillcolor="#FFFFFF"];
+    R2   [label="R",   shape=circle, style=filled, fillcolor="#FFFFFF"];
+    R3   [label="R",   shape=circle, style=filled, fillcolor="#FFFFFF"];
+    P2   [label="P",   shape=circle, style=filled, fillcolor="#FFFFFF"];
+    SP2  [label="S'",  shape=circle, style=filled, fillcolor="#FFFFFF"];
+    R4   [label="R",   shape=circle, style=filled, fillcolor="#FFFFFF"];
+    R5   [label="R",   shape=circle, style=filled, fillcolor="#FFFFFF"];
+
+    /* ── Terminal nodes (light-blue rectangles) ──────────────── */
+    id1  [label="id",  shape=rect, style=filled, fillcolor="#AED6F1"];
+    id2  [label="id",  shape=rect, style=filled, fillcolor="#AED6F1"];
+    id3  [label="id",  shape=rect, style=filled, fillcolor="#AED6F1"];
+    id4  [label="id",  shape=rect, style=filled, fillcolor="#AED6F1"];
+    id5  [label="id",  shape=rect, style=filled, fillcolor="#AED6F1"];
+    c1   [label="^",   shape=rect, style=filled, fillcolor="#AED6F1"];
+    c2   [label="^",   shape=rect, style=filled, fillcolor="#AED6F1"];
+    c3   [label="^",   shape=rect, style=filled, fillcolor="#AED6F1"];
+    sc   [label=";",   shape=rect, style=filled, fillcolor="#AED6F1"];
+
+    /* ── Epsilon nodes (yellow rectangles) ───────────────────── */
+    eps1 [label="ε",   shape=rect, style=filled, fillcolor="#F9E79F"];
+    eps2 [label="ε",   shape=rect, style=filled, fillcolor="#F9E79F"];
+    eps3 [label="ε",   shape=rect, style=filled, fillcolor="#F9E79F"];
+
+    /* ── Edges ───────────────────────────────────────────────── */
+
+    /* S → P S' */
+    S   -> P1;
+    S   -> SP1;
+
+    /* P → id R  (first P: id ^ id ^ id) */
+    P1  -> id1;
+    P1  -> R1;
+
+    /* R → ^ id R */
+    R1  -> c1;
+    R1  -> id2;
+    R1  -> R2;
+
+    /* R → ^ id R */
+    R2  -> c2;
+    R2  -> id3;
+    R2  -> R3;
+
+    /* R → ε */
+    R3  -> eps1;
+
+    /* S' → ; P S' */
+    SP1 -> sc;
+    SP1 -> P2;
+    SP1 -> SP2;
+
+    /* P → id R  (second P: id ^ id) */
+    P2  -> id4;
+    P2  -> R4;
+
+    /* R → ^ id R */
+    R4  -> c3;
+    R4  -> id5;
+    R4  -> R5;
+
+    /* R → ε */
+    R5  -> eps2;
+
+    /* S' → ε */
+    SP2 -> eps3;
+}
